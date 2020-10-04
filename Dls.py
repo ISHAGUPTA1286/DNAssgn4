@@ -1,7 +1,7 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
-
+from prettytable import PrettyTable
 
 def Exists(model_name, field_name, field_value):
     checkuserquery = "SELECT COUNT(%s.%s) FROM %s WHERE %s.%s='%d';" % (
@@ -75,11 +75,15 @@ def addContainer():
 
 def showAllUsers():
     try:
-        query = "SELECT * FROM `USER`
-        cursor.execute(query)
-        result = cursor.fetchone()
-        print(result)
-    
+        x = PrettyTable()
+        query = "SELECT * FROM `USER`"
+
+        cur.execute(query)
+        result = cur.fetchall()
+        x.field_names = ["User Id","First Name", "Last Name","Latitude","Longitude","Address"]
+        for val in result:
+            x.add_row([val['user_id'],val['first_name'],val['last_name'],val['latitude'],val['longitude'],val['address']])
+        print(x)
     except Exception as e:
         con.rollback()
         print("You are not authorised to see all users")
@@ -89,9 +93,9 @@ def showAllUsers():
 
 def showAllBees():
     try:
-        query = "SELECT * FROM `BEE`
-        cursor.execute(query)
-        result = cursor.fetchone()
+        query = "SELECT * FROM `BEE`"
+        cur.execute(query)
+        result = cur.fetchall()
         print(result)
     
     except Exception as e:
@@ -102,9 +106,9 @@ def showAllBees():
 
 def showAvalableBees():
     try:
-        query = "SELECT * FROM `DOCKED_BEE`
-        cursor.execute(query)
-        result = cursor.fetchone()
+        query = "SELECT * FROM `DOCKED_BEE`"
+        cur.execute(query)
+        result = cur.fetchall()
         print(result)
     
     except Exception as e:
@@ -116,9 +120,9 @@ def showAvalableBees():
 
 def showAllBeehives():
     try:
-        query = "SELECT * FROM `BEEHIVE`
-        cursor.execute(query)
-        result = cursor.fetchone()
+        query = "SELECT * FROM `BEEHIVE`"
+        cur.execute(query)
+        result = cur.fetchall()
         print(result)
     
     except Exception as e:
@@ -129,9 +133,9 @@ def showAllBeehives():
 
 def showAllContainers():
     try:
-        query = "SELECT * FROM `CONTAINER`
-        cursor.execute(query)
-        result = cursor.fetchone()
+        query = "SELECT * FROM `CONTAINER`"
+        cur.execute(query)
+        result = cur.fetchall()
         print(result)
     
     except Exception as e:
@@ -150,9 +154,9 @@ def sendCourier():
 
 def showAllDeliveries():
     try:
-        query = "SELECT * FROM `DELIVERY`
-        cursor.execute(query)
-        result = cursor.fetchone()
+        query = "SELECT * FROM `DELIVERY`"
+        cur.execute(query)
+        result = cur.fetchall()
         print(result)
     
     except Exception as e:
@@ -219,10 +223,10 @@ def dispatch(ch):
         addUser()
     elif(ch == 2):
         addStation()
-    # elif(ch == 3):
-    #     option3()
-    # elif(ch == 4):
-    #     option4()
+    elif(ch == 3):
+        showAllUsers()
+    elif(ch == 4):
+        showAllBees()
     else:
         print("Error: Invalid Option")
 
@@ -258,8 +262,8 @@ while(1):
                 # Here taking example of Employee Mini-world
                 print("1. Add User")  # Hire an Employee
                 print("2. Add Station")  # Fire an Employee
-                print("3. Option 3")  # Promote Employee
-                print("4. Option 4")  # Employee Statistics
+                print("3. Show All Users")  # Promote Employee
+                print("4. Show All Bees")  # Employee Statistics
                 print("5. Logout")
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
