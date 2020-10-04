@@ -23,19 +23,66 @@ def addContainer():
     pass
 
 def showAllUsers():
-    pass
+    try:
+        query = "SELECT * FROM `USER`
+        cursor.execute(query)
+        result = cursor.fetchone()
+        print(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("You are not authorised to see all users")
+        print(">>>>>>>>>>>>>", e)
+
 
 def showAllBees():
-    pass
+    try:
+        query = "SELECT * FROM `BEE`
+        cursor.execute(query)
+        result = cursor.fetchone()
+        print(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("bee data is private to company")
+        print(">>>>>>>>>>>>>", e)
 
 def showAvalableBees():
-    pass
+    try:
+        query = "SELECT * FROM `DOCKED_BEE`
+        cursor.execute(query)
+        result = cursor.fetchone()
+        print(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("bee data is private to company")
+        print(">>>>>>>>>>>>>", e)
+    
 
 def showAllBeehives():
-    pass
+    try:
+        query = "SELECT * FROM `BEEHIVE`
+        cursor.execute(query)
+        result = cursor.fetchone()
+        print(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("beehive data is private to company")
+        print(">>>>>>>>>>>>>", e)
 
 def showAllContainers():
-    pass
+    try:
+        query = "SELECT * FROM `CONTAINER`
+        cursor.execute(query)
+        result = cursor.fetchone()
+        print(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("CONTAINER data is private to company")
+        print(">>>>>>>>>>>>>", e)
 
 def showAvailableContaniers():
     pass
@@ -44,10 +91,19 @@ def sendCourier():
     pass
 
 def showAllDeliveries():
-    pass
+    try:
+        query = "SELECT * FROM `DELIVERY`
+        cursor.execute(query)
+        result = cursor.fetchone()
+        print(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("dilivery data is private to company")
+        print(">>>>>>>>>>>>>", e)
 
 def showDeliveryStatus():
-    passs
+    pass
 
 def deleteUserWithID():
     pass
@@ -160,3 +216,29 @@ while(1):
         tmp = sp.call('clear', shell=True)
         print("Connection Refused: Either username or password is incorrect or user doesn't have access to database")
         tmp = input("Enter any key to CONTINUE>")
+
+# connection = pymysql.connect(host='localhost',
+#                              user='user',
+#                              password='passwd',
+#                              db='db',
+#                              charset='utf8mb4',
+#                              cursorclass=pymysql.cursors.DictCursor)
+
+# try:
+#     with connection.cursor() as cursor:
+#         # Create a new record
+#         sql = "INSERT INTO `users` (`email`, `password`) VALUES (%s, %s)"
+#         cursor.execute(sql, ('webmaster@python.org', 'very-secret'))
+
+#     # connection is not autocommit by default. So you must commit to save
+#     # your changes.
+#     connection.commit()
+
+#     with connection.cursor() as cursor:
+#         # Read a single record
+#         sql = "SELECT `id`, `password` FROM `users` WHERE `email`=%s"
+#         cursor.execute(sql, ('webmaster@python.org',))
+#         result = cursor.fetchone()
+#         print(result)
+# finally:
+#     connection.close()
