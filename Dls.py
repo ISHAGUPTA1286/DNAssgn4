@@ -12,6 +12,22 @@ def Exists(model_name, field_name, field_value):
         return False
     return True
 
+def printPretty(dict_list):
+    if len(dict_list)==0:
+        print("No items in the database")
+        return
+    x = PrettyTable()
+    field_names =[]
+    for val in dict_list[0]:
+        field_names+=[val]
+    x.field_names = field_names
+    for val in dict_list:
+        y=[]
+        for val2 in val:
+            y+=[val[val2]]
+        x.add_row(y)
+    print(x)
+
 
 def addUser():
     try:
@@ -75,15 +91,10 @@ def addContainer():
 
 def showAllUsers():
     try:
-        x = PrettyTable()
         query = "SELECT * FROM `USER`"
-
         cur.execute(query)
         result = cur.fetchall()
-        x.field_names = ["User Id","First Name", "Last Name","Latitude","Longitude","Address"]
-        for val in result:
-            x.add_row([val['user_id'],val['first_name'],val['last_name'],val['latitude'],val['longitude'],val['address']])
-        print(x)
+        printPretty(result)
     except Exception as e:
         con.rollback()
         print("You are not authorised to see all users")
@@ -96,7 +107,7 @@ def showAllBees():
         query = "SELECT * FROM `BEE`"
         cur.execute(query)
         result = cur.fetchall()
-        print(result)
+        printPretty(result)
     
     except Exception as e:
         con.rollback()
@@ -109,7 +120,7 @@ def showAvalableBees():
         query = "SELECT * FROM `DOCKED_BEE`"
         cur.execute(query)
         result = cur.fetchall()
-        print(result)
+        printPretty(result)
     
     except Exception as e:
         con.rollback()
@@ -123,7 +134,7 @@ def showAllBeehives():
         query = "SELECT * FROM `BEEHIVE`"
         cur.execute(query)
         result = cur.fetchall()
-        print(result)
+        printPretty(result)
     
     except Exception as e:
         con.rollback()
@@ -136,7 +147,7 @@ def showAllContainers():
         query = "SELECT * FROM `CONTAINER`"
         cur.execute(query)
         result = cur.fetchall()
-        print(result)
+        printPretty(result)
     
     except Exception as e:
         con.rollback()
@@ -157,7 +168,7 @@ def showAllDeliveries():
         query = "SELECT * FROM `DELIVERY`"
         cur.execute(query)
         result = cur.fetchall()
-        print(result)
+        printPretty(result)
     
     except Exception as e:
         con.rollback()
