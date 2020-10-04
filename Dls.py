@@ -3,56 +3,114 @@ import pymysql
 import pymysql.cursors
 
 
+def Exists(model_name, field_name, field_value):
+    checkuserquery = "SELECT COUNT(%s.%s) FROM %s WHERE %s.%s='%d';" % (
+        model_name, field_name, model_name, model_name, field_name, field_value)
+    cur.execute(checkuserquery)
+    count = cur.fetchall()[0]["COUNT(%s.%s)"%(model_name,field_name)]
+    if(count==0):
+        return False
+    return True
+
+
 def addUser():
-    pass
-    pass
+    try:
+        row = {}
+        print("Enter User Details")
+        row['first_name'] = input("First Name: ")
+        row['user_id'] = int(input("User ID: "))
+        row['last_name'] = input("Last Name: ")
+        row['latitude'] = float(input("Latitude: "))
+        row['longitude'] = float(input("Longitude: "))
+        row['address'] = input("Address: ")
+
+        query = "INSERT INTO USER(user_id,first_name,last_name,latitude,longitude,address) VALUES('%d','%s','%s','%f','%f','%s')" % (
+            row["user_id"], row["first_name"], row["last_name"], row["latitude"], row["longitude"], row["address"])
+
+        cur.execute(query)
+        con.commit()
+        print("Succesfully added the user")
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database")
+        print(">>>>>>>>>>>>>", e)
+
 
 def addStation():
-    pass
+    try:
+        row = {}
+        print("Enter User Details")
+        row['station_id'] = int(input("Station ID: "))
+        row['user_id'] = int(input("Buy station for the user with User ID: "))
+        row['latitude'] = float(input("Latitude: "))
+        row['longitude'] = float(input("Longitude: "))
+
+        query = "INSERT INTO STATION(station_id,user_id,latitude,longitude) VALUES('%d','%d','%f','%f')" % (
+            row["station_id"], row["user_id"], row["latitude"], row["longitude"])
+
+        cur.execute(query)
+        con.commit()
+        print("Succesfully added the station")
+    except Exception as e:
+        con.rollback()
+        print("Failed to insert into database")
+        print(">>>>>>>>>>>>>", e)
+
 
 def addBee():
     pass
 
+
 def addBeehive():
     pass
+
 
 def addBeehiveHole():
     pass
 
+
 def addContainer():
     pass
+
 
 def showAllUsers():
     pass
 
+
 def showAllBees():
     pass
+
 
 def showAvalableBees():
     pass
 
+
 def showAllBeehives():
     pass
+
 
 def showAllContainers():
     pass
 
+
 def showAvailableContaniers():
     pass
+
 
 def sendCourier():
     pass
 
+
 def showAllDeliveries():
     pass
 
-def showDeliveryStatus():
-    passs
 
-def deleteUserWithID():
+def showDeliveryStatus():
     pass
 
 
+def deleteUserWithID():
+    pass
 
 
 # def hireAnEmployee():
@@ -102,29 +160,29 @@ def dispatch(ch):
     Function that maps helper functions to option entered
     """
 
-    # if(ch == 1):
-        # hireAnEmployee()
-    # elif(ch == 2):
-    #     option2()
+    if(ch == 1):
+        addUser()
+    elif(ch == 2):
+        addStation()
     # elif(ch == 3):
     #     option3()
     # elif(ch == 4):
     #     option4()
-    # else:
-        # print("Error: Invalid Option")
+    else:
+        print("Error: Invalid Option")
 
 
 # Global
 while(1):
     tmp = sp.call('clear', shell=True)
-    
+
     # Can be skipped if you want to hard core username and password
     username = input("Username: ")
     password = input("Password: ")
 
     try:
         # Set db name accordingly which have been create by you
-        # Set host to the server's address if you don't want to use local SQL server 
+        # Set host to the server's address if you don't want to use local SQL server
         con = pymysql.connect(host='localhost',
                               user=username,
                               password=password,
@@ -143,8 +201,8 @@ while(1):
             while(1):
                 tmp = sp.call('clear', shell=True)
                 # Here taking example of Employee Mini-world
-                print("1. Option 1")  # Hire an Employee
-                print("2. Option 2")  # Fire an Employee
+                print("1. Add User")  # Hire an Employee
+                print("2. Add Station")  # Fire an Employee
                 print("3. Option 3")  # Promote Employee
                 print("4. Option 4")  # Employee Statistics
                 print("5. Logout")
