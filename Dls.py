@@ -182,7 +182,68 @@ def showDeliveryStatus():
 def deleteUserWithID():
     pass
 
+def updateUserLocation():
+    # take userid, lat, long as input and update the user location
+    pass
 
+def updateStationLocation():
+    # take station_id, lat, longas input
+    pass
+
+def completeDelivery():
+    #delete delivery, delivery_status, and container things
+    pass
+
+def dockTheBeeWithID():
+    #take bee, and dock it, change delivery status to docked, change bee status to docked, delete transit status and transit bee
+    pass
+
+def undockTheBeeWithID():
+    pass
+    # do the opposite of docking the bee
+
+def addUserSubscription():
+    #take the userid and wallet amount and add subscription
+    pass
+
+def updateSubscription():
+    #take the subscription_id and added amount and update the wallet
+    pass
+
+def showUserSubscriptions():
+    #show all the user subsriptions for the given user_id
+    pass
+
+def findBees():
+    pass
+    #take lat and long and radius and find the bees in the given radius of that point
+
+def updateBeeLocation():
+    pass
+    #take the given bee_id, lat and long and update
+
+def findHives():
+    #take the capacity as parameter and filter all the hives with capacity above given
+    pass
+
+def findCont():
+    #take weight as input and find all the containers with weight aboove the given weight
+    pass
+
+def findTimePassed():
+    #take delivery id as input and find the time passed from the bg_time.
+    pass
+
+def searchUserWithFirstName():
+    #take firstname as input and give info about the user
+    pass
+
+def searchDeliveriesUserIsSending():
+    #give all the deliveries pending for the user as sender
+    pass
+
+def searchAllDeliveriesUserIsReceiving():
+    pass
 # def hireAnEmployee():
 #     """
 #     This is a sample function implemented for the refrence.
