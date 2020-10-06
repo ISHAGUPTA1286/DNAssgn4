@@ -670,23 +670,6 @@ def dispatch(ch):
     elif(ch == 15):
         undockTheContainerWithID()
     elif(ch == 16):
-        showAllBees()
-    elif(ch == 17):
-        addUserSubscription()
-    elif(ch == 18):
-        updateSubscription()
-    elif (ch==19):
-        showUserSubscriptions()
-    elif (ch == 20):
-        updateBeeLocation()
-    elif(ch==21):
-        findCont()
-    elif (ch==22):
-        searchUserWithFirstName()
-    elif (ch==23):
-        searchDeliveriesUserIsSending()
-    elif(ch==24):
-        searchAllDeliveriesUserIsReceiving()
         showDeliveryStatus()
     elif(ch == 17):
         deleteUserWithID()
@@ -696,6 +679,23 @@ def dispatch(ch):
         findHiveCapacity()
     elif(ch==20):
         findTimePassed()
+    elif(ch == 21):
+        addUserSubscription()
+    elif(ch == 22):
+        updateSubscription()
+    elif (ch==23):
+        showUserSubscriptions()
+    elif (ch == 24):
+        updateBeeLocation()
+    elif(ch==25):
+        findCont()
+    elif (ch==26):
+        searchUserWithFirstName()
+    elif (ch==27):
+        searchDeliveriesUserIsSending()
+    elif(ch==28):
+        searchAllDeliveriesUserIsReceiving()
+   
 
     else:
         print("Error: Invalid Option")
@@ -729,22 +729,10 @@ while(1):
         with con.cursor() as cur:
             while(1):
                 tmp = sp.call('clear', shell=True)
-                # Here taking example of Employee Mini-world
-                print("1. Add User")  # Hire an Employee
-                print("2. Add Station")  # Fire an Employee
-                print("3. Show All Users")  # Promote Employee
-                print("4. Show All Bees")  # Employee Statistics
-                
-              
-                print("17. Take Subscription") # Apply for subscription
-                print("18. Update Subscription") # Updating subscription details
-                print("19. Show USERS Subscriptions ") # Show all users with subscription
-                print("20. Update BEE Location") # updates bee location
-                print("21. Filter containers greater than given weight") #filter containers greater than given weight
-                print("22. Search the USER") # Search the user with first name
-                print("23. Search Deliveries User is Sending") #SEarch deliveries which user is sending
-                print("23. Search Deliveries USer is Receiving") #SEarch deliveries which user is recieving
-                print("5. Logout")
+                print("1. Add User")  
+                print("2. Add Station")  
+                print("3. Show All Users")  
+                print("4. Show All Bees")  
                 print("5. show available containers")
                 print("6. show all containers")
                 print("7. show available bees")
@@ -761,10 +749,17 @@ while(1):
                 print("18. Find bees in the location ")
                 print("19. Find hive capacity")
                 print("20. Find time passed for the delivery")
-                # print("9. show all Deliveries")
+                print("21. Take Subscription") # Apply for subscription
+                print("22. Update Subscription") # Updating subscription details
+                print("23. Show USERS Subscriptions ") # Show all users with subscription
+                print("24. Update BEE Location") # updates bee location
+                print("25. Filter containers greater than given weight") #filter containers greater than given weight
+                print("26. Search the USER") # Search the user with first name
+                print("27. Search Deliveries User is Sending") #SEarch deliveries which user is sending
+                print("28. Search Deliveries USer is Receiving") #SEarch deliveries which user is recieving
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
-                if ch == 25:
+                if ch == -1:
                     break
                 else:
                     dispatch(ch)
