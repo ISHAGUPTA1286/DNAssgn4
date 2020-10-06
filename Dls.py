@@ -244,8 +244,21 @@ def addUserSubscription():
 
 def updateSubscription():
     #take the subscription_id and added amount and update the wallet
-    
-    pass
+    try:
+        row = {}
+        print("UPDATING SUBSCRIPTION DETAILS")
+        row['user_id'] = int(input("ENTER USER ID: "))
+        row['wallet_amount'] = float(input("ENTER AMOUNT TO BE ADDED: "))
+        query = "UPDATE 'SUBSCRIPTION' SET wallet_amount = wallet_amount + '%d' WHERE user_id = '%d'" %(
+            row['wallet_amount'],row['user_id'])
+
+        cur.execute(query)
+        con.commit()
+        print("Successfully Updated")
+    except Exception as e:
+        con.rollback()
+        print("Couldn't Update")
+        print(">>>>>>>>>>>>>", e)
 
 def showUserSubscriptions():
     #show all the user subsriptions for the given user_id
@@ -269,8 +282,24 @@ def findBees():
     #take lat and long and radius and find the bees in the given radius of that point
 
 def updateBeeLocation():
-    pass
     #take the given bee_id, lat and long and update
+    try:
+        row = {}
+        print("Enter given BEE_ID and its updated location details")
+        row['bee_id'] = int(input("BEE_ID: "))
+        row['latitude'] = float(input("Updated Location's Latitude: "))
+        row['longitude'] = float(input("Updated Location's Longitude: "))
+
+        query = "UPDATE `BEE` SET latitude = '%f', longitude = '%f' WHERE bee_id = '%d'" % (
+            row["latitude"],row["longitude"],row["bee_id"])
+        
+        cur.execute(query)
+        con.commit()
+        print(" BEE Location details updated successfully")
+    except Exception as e:
+        con.rollback()
+        print("Could not Update location")
+        print(">>>>>>>>>>>>>", e)
 
 def findHives():
     #take the capacity as parameter and filter all the hives with capacity above given
@@ -278,7 +307,19 @@ def findHives():
 
 def findCont():
     #take weight as input and find all the containers with weight aboove the given weight
-    pass
+    try:
+        row = {}
+        print("Filter containers greater than given weight ")
+        row['weight'] = float(input("ENTER weight of container: "))
+
+        query = "SELECT * FROM CONTAINER WHERE `weight`>='%f'" % (row['weight'])
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+    except Exception as e:
+        con.rollback()
+        print("SEARCH FAILED")
+        print(">>>>>>>>>>>>>", e)
 
 def findTimePassed():
     #take delivery id as input and find the time passed from the bg_time.
@@ -286,15 +327,55 @@ def findTimePassed():
 
 def searchUserWithFirstName():
     #take firstname as input and give info about the user
-    pass
+    try:
+       row = {}
+       print("SEARCH THE USER")
+       row['first_name'] = input("Enter FIRST NAME of USER: ")
+       
+       query = "SELECT * FROM USER WHERE first_name = '%s'" % (row['first_name']) 
+
+       cur.execute(query)
+       result = cur.fetchall()
+       printPretty(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
 
 def searchDeliveriesUserIsSending():
     #give all the deliveries pending for the user as sender
-    pass
+    try:
+        row = {}
+        print("SEARCH DELIVERIES USER IS SENDING")
+        row['user_id'] = int(input("ENTER USER ID: "))
+        query = "SELECT * FROM DELIVERY WHERE sender_id ='%d'" % (row['user_id'])
+
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+
+    except Exception as e: 
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
 
 def searchAllDeliveriesUserIsReceiving():
-    pass
+    try:
+        row = {}
+        print("SEARCH DELIVERIES USER IS RECEIVING")
+        row['user_id'] = int(input("ENTER USER ID: "))
+        query = "SELECT * FROM DELIVERY WHERE receiver_id ='%d'" % (row['user_id'])
 
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
+    
 
 def dispatch(ch):
     """
@@ -336,7 +417,19 @@ def dispatch(ch):
     elif(ch == 17):
         addUserSubscription()
     elif(ch == 18):
+        updateSubscription()
+    elif (ch==19):
         showUserSubscriptions()
+    elif (ch == 20):
+        updateBeeLocation()
+    elif(ch==21):
+        findCont()
+    elif (ch==22):
+        searchUserWithFirstName()
+    elif (ch==23):
+        searchDeliveriesUserIsSending()
+    elif(ch==24):
+        searchAllDeliveriesUserIsReceiving()
     else:
         print("Error: Invalid Option")
 
@@ -375,10 +468,15 @@ while(1):
                 print("3. Show All Users")  # Promote Employee
                 print("4. Show All Bees")  # Employee Statistics
                 
-                # started byy me
+              
                 print("17. Take Subscription") # Apply for subscription
-                print("18. Show USERS Subscriptions ") # Show all users with subscription
-                #######
+                print("18. Update Subscription") # Updating subscription details
+                print("19. Show USERS Subscriptions ") # Show all users with subscription
+                print("20. Update BEE Location") # updates bee location
+                print("21. Filter containers greater than given weight") #filter containers greater than given weight
+                print("22. Search the USER") # Search the user with first name
+                print("23. Search Deliveries User is Sending") #SEarch deliveries which user is sending
+                print("23. Search Deliveries USer is Receiving") #SEarch deliveries which user is recieving
                 print("5. Logout")
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
