@@ -76,6 +76,42 @@ def addStation():
         print(">>>>>>>>>>>>>", e)
 
 
+def addBee():
+    pass
+    # try:
+    #     row = {}
+    #     print("Enter BEE Details")
+    #     row['bee_id'] = int(input("BEE ID: "))
+    #     row['latitude'] = float(input("Location Latitude: "))
+    #     row['longitude'] = float(input("Location Longitude: "))
+    #     row['bee_class'] = input("BEE CLASS- QUEEN or WORKER: ")
+    #     query = "INSERT INTO BEE(bee_id,latitude,longitude,bee_class) VALUES('%d', '%f','%f',,'%s')" %(
+    #         row["bee_id"],row["latitude"],row["longitude"],row["bee_class"])
+        
+    #     cur.execute(query)
+    #     con.commit()
+    #     print("Successfully added BEE Details")
+    # except Exception as e:
+    #     con.rollback()
+    #     print("Failed to insert BEE Details in Database")
+    #     print(">>>>>>>>>>>>>",e)
+    
+# def addBee():
+#     pass
+
+
+# def addBeehive():
+#     pass
+
+
+# def addBeehiveHole():
+#     pass
+
+
+# def addContainer():
+#     pass
+
+
 def showAllUsers():
     try:
         query = "SELECT * FROM `USER`"
@@ -384,16 +420,65 @@ def undockTheContainerWithID():
 
 
 def addUserSubscription():
+    #take the userid and wallet amount and add subscription
+    try:
+        row={}
+        print("Add Details for Subsription for User")
+        row['wallet_amount'] = float(input("Enter Wallet Amount: "))
+        row['user_id'] = int(input("Enter USER ID:")) 
+
+        query = "INSERT INTO SUBSCRIPTION(wallet_amount,user_id) VALUES('%f','%d')" % (
+            row["wallet_amount"] , row["user_id"])
+        
+        cur.execute(query)
+        con.commit()
+        print("You have successfully subscribed")
+    except Exception as e:
+        con.rollback()
+        print("Subscription Failed")
+        print(">>>>>>>>>>>>>", e)
+    # pass
     # take the userid and wallet amount and add subscription
     pass
 
 
 def updateSubscription():
+    #take the subscription_id and added amount and update the wallet
+    try:
+        row = {}
+        print("UPDATING SUBSCRIPTION DETAILS")
+        row['user_id'] = int(input("ENTER USER ID: "))
+        row['wallet_amount'] = float(input("ENTER AMOUNT TO BE ADDED: "))
+        query = "UPDATE 'SUBSCRIPTION' SET wallet_amount = wallet_amount + '%d' WHERE user_id = '%d'" %(
+            row['wallet_amount'],row['user_id'])
+
+        cur.execute(query)
+        con.commit()
+        print("Successfully Updated")
+    except Exception as e:
+        con.rollback()
+        print("Couldn't Update")
+        print(">>>>>>>>>>>>>", e)
     # take the subscription_id and added amount and update the wallet
     pass
 
 
 def showUserSubscriptions():
+    #show all the user subsriptions for the given user_id
+    try:
+        row = {}
+        print("Enter USER-ID for which you want to see SUBSCRIPTIONS")
+        row['user_id'] = int(input("USER ID: "))
+        query = "SELECT * FROM `SUBSCRIPTION` WHERE user_id = %d" % (row["user_id"])
+
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+    except Exception as e:
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
+    # pass
     # show all the user subsriptions for the given user_id
     pass
 
@@ -418,6 +503,24 @@ def findBees():
 
 
 def updateBeeLocation():
+    #take the given bee_id, lat and long and update
+    try:
+        row = {}
+        print("Enter given BEE_ID and its updated location details")
+        row['bee_id'] = int(input("BEE_ID: "))
+        row['latitude'] = float(input("Updated Location's Latitude: "))
+        row['longitude'] = float(input("Updated Location's Longitude: "))
+
+        query = "UPDATE `BEE` SET latitude = '%f', longitude = '%f' WHERE bee_id = '%d'" % (
+            row["latitude"],row["longitude"],row["bee_id"])
+        
+        cur.execute(query)
+        con.commit()
+        print(" BEE Location details updated successfully")
+    except Exception as e:
+        con.rollback()
+        print("Could not Update location")
+        print(">>>>>>>>>>>>>", e)
     pass
     # take the given bee_id, lat and long and update
 
@@ -435,6 +538,20 @@ def findHiveCapacity():
         print(">>>>>>>>>>>>>>>",e)
 
 def findCont():
+    #take weight as input and find all the containers with weight aboove the given weight
+    try:
+        row = {}
+        print("Filter containers greater than given weight ")
+        row['weight'] = float(input("ENTER weight of container: "))
+
+        query = "SELECT * FROM CONTAINER WHERE `weight`>='%f'" % (row['weight'])
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+    except Exception as e:
+        con.rollback()
+        print("SEARCH FAILED")
+        print(">>>>>>>>>>>>>", e)
     # take weight as input and find all the containers with weight aboove the given weight
     pass
 
@@ -460,18 +577,62 @@ def findTimePassed():
 
 
 def searchUserWithFirstName():
+    #take firstname as input and give info about the user
+    try:
+       row = {}
+       print("SEARCH THE USER")
+       row['first_name'] = input("Enter FIRST NAME of USER: ")
+       
+       query = "SELECT * FROM USER WHERE first_name = '%s'" % (row['first_name']) 
+
+       cur.execute(query)
+       result = cur.fetchall()
+       printPretty(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
     # take firstname as input and give info about the user
     pass
 
 
 def searchDeliveriesUserIsSending():
+    #give all the deliveries pending for the user as sender
+    try:
+        row = {}
+        print("SEARCH DELIVERIES USER IS SENDING")
+        row['user_id'] = int(input("ENTER USER ID: "))
+        query = "SELECT * FROM DELIVERY WHERE sender_id ='%d'" % (row['user_id'])
+
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+
+    except Exception as e: 
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
     # give all the deliveries pending for the user as sender
     pass
 
 
 def searchAllDeliveriesUserIsReceiving():
-    pass
+    try:
+        row = {}
+        print("SEARCH DELIVERIES USER IS RECEIVING")
+        row['user_id'] = int(input("ENTER USER ID: "))
+        query = "SELECT * FROM DELIVERY WHERE receiver_id ='%d'" % (row['user_id'])
 
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+    
+    except Exception as e:
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
+    
 
 def dispatch(ch):
     """
@@ -509,6 +670,23 @@ def dispatch(ch):
     elif(ch == 15):
         undockTheContainerWithID()
     elif(ch == 16):
+        showAllBees()
+    elif(ch == 17):
+        addUserSubscription()
+    elif(ch == 18):
+        updateSubscription()
+    elif (ch==19):
+        showUserSubscriptions()
+    elif (ch == 20):
+        updateBeeLocation()
+    elif(ch==21):
+        findCont()
+    elif (ch==22):
+        searchUserWithFirstName()
+    elif (ch==23):
+        searchDeliveriesUserIsSending()
+    elif(ch==24):
+        searchAllDeliveriesUserIsReceiving()
         showDeliveryStatus()
     elif(ch == 17):
         deleteUserWithID()
@@ -556,6 +734,17 @@ while(1):
                 print("2. Add Station")  # Fire an Employee
                 print("3. Show All Users")  # Promote Employee
                 print("4. Show All Bees")  # Employee Statistics
+                
+              
+                print("17. Take Subscription") # Apply for subscription
+                print("18. Update Subscription") # Updating subscription details
+                print("19. Show USERS Subscriptions ") # Show all users with subscription
+                print("20. Update BEE Location") # updates bee location
+                print("21. Filter containers greater than given weight") #filter containers greater than given weight
+                print("22. Search the USER") # Search the user with first name
+                print("23. Search Deliveries User is Sending") #SEarch deliveries which user is sending
+                print("23. Search Deliveries USer is Receiving") #SEarch deliveries which user is recieving
+                print("5. Logout")
                 print("5. show available containers")
                 print("6. show all containers")
                 print("7. show available bees")
