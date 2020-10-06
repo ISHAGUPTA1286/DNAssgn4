@@ -75,6 +75,24 @@ def addStation():
 
 def addBee():
     pass
+    # try:
+    #     row = {}
+    #     print("Enter BEE Details")
+    #     row['bee_id'] = int(input("BEE ID: "))
+    #     row['latitude'] = float(input("Location Latitude: "))
+    #     row['longitude'] = float(input("Location Longitude: "))
+    #     row['bee_class'] = input("BEE CLASS- QUEEN or WORKER: ")
+    #     query = "INSERT INTO BEE(bee_id,latitude,longitude,bee_class) VALUES('%d', '%f','%f',,'%s')" %(
+    #         row["bee_id"],row["latitude"],row["longitude"],row["bee_class"])
+        
+    #     cur.execute(query)
+    #     con.commit()
+    #     print("Successfully added BEE Details")
+    # except Exception as e:
+    #     con.rollback()
+    #     print("Failed to insert BEE Details in Database")
+    #     print(">>>>>>>>>>>>>",e)
+    
 
 
 def addBeehive():
@@ -204,15 +222,45 @@ def undockTheBeeWithID():
 
 def addUserSubscription():
     #take the userid and wallet amount and add subscription
-    pass
+    try:
+        row={}
+        print("Add Details for Subsription for User")
+        row['wallet_amount'] = float(input("Enter Wallet Amount: "))
+        row['user_id'] = int(input("Enter USER ID:")) 
+
+        query = "INSERT INTO SUBSCRIPTION(wallet_amount,user_id) VALUES('%f','%d')" % (
+            row["wallet_amount"] , row["user_id"])
+        
+        cur.execute(query)
+        con.commit()
+        print("You have successfully subscribed")
+    except Exception as e:
+        con.rollback()
+        print("Subscription Failed")
+        print(">>>>>>>>>>>>>", e)
+    # pass
 
 def updateSubscription():
     #take the subscription_id and added amount and update the wallet
+    
     pass
 
 def showUserSubscriptions():
     #show all the user subsriptions for the given user_id
-    pass
+    try:
+        row = {}
+        print("Enter USER-ID for which you want to see SUBSCRIPTIONS")
+        row['user_id'] = int(input("USER ID: "))
+        query = "SELECT * FROM `SUBSCRIPTION` WHERE user_id = %d" % (row["user_id"])
+
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+    except Exception as e:
+        con.rollback()
+        print("Data is private to company")
+        print(">>>>>>>>>>>>>", e)
+    # pass
 
 def findBees():
     pass
@@ -299,6 +347,12 @@ def dispatch(ch):
         showAllUsers()
     elif(ch == 4):
         showAllBees()
+
+        # started by me
+    elif(ch == 6):
+        addUserSubscription()
+    elif(ch == 7):
+        showUserSubscriptions()
     else:
         print("Error: Invalid Option")
 
@@ -336,6 +390,11 @@ while(1):
                 print("2. Add Station")  # Fire an Employee
                 print("3. Show All Users")  # Promote Employee
                 print("4. Show All Bees")  # Employee Statistics
+                
+                # started byy me
+                print("6. Take Subscription") # Apply for subscription
+                print("7. Show USERS Subscriptions ") # Show all users with subscription
+                #######
                 print("5. Logout")
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
