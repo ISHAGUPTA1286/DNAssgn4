@@ -227,22 +227,23 @@ def showDeliveryStatus():
         result = cur.fetchall()
         printPretty(result)
 
-        query = "SELECT * from DOCKED where container_id=%d"%container_id
+        query = "SELECT * from DOCKED where container_id=%d" % container_id
         cur.execute(query)
         result = cur.fetchall()
-        if len(result)==0:
+        if len(result) == 0:
             pass
         else:
-            print("THe container is docked in beehive with id %d"%result[0]['hive_id'])
+            print("THe container is docked in beehive with id %d" %
+                  result[0]['hive_id'])
 
-
-        query = "SELECT * from TRANSIT where container_id=%d"%container_id
+        query = "SELECT * from TRANSIT where container_id=%d" % container_id
         cur.execute(query)
         result = cur.fetchall()
-        if len(result)==0:
+        if len(result) == 0:
             pass
         else:
-            print("THe container is in transit by bee with id %d"%result[0]['bee_id'])
+            print("THe container is in transit by bee with id %d" %
+                  result[0]['bee_id'])
 
     except Exception as e:
         con.rollback()
@@ -253,11 +254,10 @@ def showDeliveryStatus():
 def deleteUserWithID():
     try:
         user_id = int(input("User ID: "))
-        query1 = "DELETE from SUBSCRIPTION where user_id=%d"%user_id
-        query2 = "DELETE from STATION where user_id=%d"%user_id
+        query1 = "DELETE from SUBSCRIPTION where user_id=%d" % user_id
+        query2 = "DELETE from STATION where user_id=%d" % user_id
         query3 = "DELETE from USER where user_id=%d" % user_id
 
-        
         cur.execute(query1)
         con.commit()
         cur.execute(query2)
@@ -282,7 +282,6 @@ def updateUserLocation():
         cur.execute(query)
         con.commit()
         print("Successfully updated the user location")
-
 
     except Exception as e:
         con.rollback()
@@ -316,11 +315,11 @@ def completeDelivery():
         query1 = "DELETE from DOCKED where container_id=%d" % container_id
         query2 = "DELETE from TRANSIT where container_id=%d" % container_id
         cur.execute(query1)
-        con.commit()        
+        con.commit()
         cur.execute(query2)
-        con.commit()        
+        con.commit()
         cur.execute(query3)
-        con.commit()        
+        con.commit()
         cur.execute(query4)
         con.commit()
 
@@ -328,7 +327,7 @@ def completeDelivery():
     except Exception as e:
         con.rollback()
         print("ERROr")
-        print(">>>>>>>>>>>>>", e)    
+        print(">>>>>>>>>>>>>", e)
 
 
 def dockTheContainerWithIDToBeeHiveWithId():
@@ -336,23 +335,23 @@ def dockTheContainerWithIDToBeeHiveWithId():
         container_id = int(input("Container ID: "))
         hive_id = int(input("Hive ID: "))
 
-        #validate if container is in transit
-        query = "SELECT * from TRANSIT where container_id=%d"%container_id
+        # validate if container is in transit
+        query = "SELECT * from TRANSIT where container_id=%d" % container_id
         cur.execute(query)
-        if(len(cur.fetchall())==0):
+        if(len(cur.fetchall()) == 0):
             raise("The container ID is not valid")
-        query = "DELETE from TRANSIT where container_id=%d"%container_id
+        query = "DELETE from TRANSIT where container_id=%d" % container_id
         cur.execute(query)
         con.commit()
 
-        query = "INSERT INTO DOCKED VALUES(%d,%d)"%(container_id,hive_id)
+        query = "INSERT INTO DOCKED VALUES(%d,%d)" % (container_id, hive_id)
         cur.execute(query)
         con.commit()
         print("Succesfully docked the container")
     except Exception as e:
         con.rollback()
         print("ERROr")
-        print(">>>>>>>>>>>>>", e)  
+        print(">>>>>>>>>>>>>", e)
 
 
 def undockTheContainerWithID():
@@ -360,30 +359,28 @@ def undockTheContainerWithID():
         container_id = int(input("Container ID: "))
         # hive_id = int(input("Hive ID: "))
 
-        #validate if container is docked
-        query = "SELECT * from DOCKED where container_id=%d"%container_id
+        # validate if container is docked
+        query = "SELECT * from DOCKED where container_id=%d" % container_id
         cur.execute(query)
-        if(len(cur.fetchall())==0):
+        if(len(cur.fetchall()) == 0):
             raise("The container ID is not valid")
-        query = "DELETE from DOCKED where container_id=%d"%container_id
+        query = "DELETE from DOCKED where container_id=%d" % container_id
         cur.execute(query)
         con.commit()
 
         bee_id = fetchOneAvailableBee()
-        if(bee_id==-1):
+        if(bee_id == -1):
             raise("No available BEE")
-        query = "INSERT INTO TRANSIT VALUES(%d,%d)"%(container_id,bee_id)
+        query = "INSERT INTO TRANSIT VALUES(%d,%d)" % (container_id, bee_id)
         cur.execute(query)
         con.commit()
 
         print("Succesfully undocked the container")
 
-
     except Exception as e:
         con.rollback()
         print("ERROr")
-        print(">>>>>>>>>>>>>", e)  
-
+        print(">>>>>>>>>>>>>", e)
 
 
 def addUserSubscription():
@@ -402,8 +399,22 @@ def showUserSubscriptions():
 
 
 def findBees():
-    pass
-    # take lat and long and radius and find the bees in the given radius of that point
+    try:
+        lat = float(input("Latitude: "))
+        dlat = float(input("+/-latitude: "))
+        lng = float(input("Longitude: "))
+        dlng = float(input("+/-longitude: "))
+    
+
+        query = "SELECT * from BEE where BEE.latitude >%d AND BEE.latitude<%d AND BEE.longitude>%d AND BEE.longitude<%d" % (
+            lat-dlat, lat+dlat, lng- dlng, lng+ dlng)
+        cur.execute(query)
+        result = cur.fetchall()
+        printPretty(result)
+    except Exception as e:
+        con.rollback()
+        print("ERROr")
+        print(">>>>>>>>>>>>>", e)
 
 
 def updateBeeLocation():
@@ -411,10 +422,17 @@ def updateBeeLocation():
     # take the given bee_id, lat and long and update
 
 
-def findHives():
-    # take the capacity as parameter and filter all the hives with capacity above given
-    pass
+def findHiveCapacity():
+    try:
+        hive_id = int(input('Hive ID: '))
+        
+        query = "SELECT COUNT(hive_id) from BEEHIVE_HOLE where hive_id=%d"%hive_id
+        
+        cur.execute(query)
 
+        printPretty(cur.fetchall())
+    except Exception as e:
+        print(">>>>>>>>>>>>>>>",e)
 
 def findCont():
     # take weight as input and find all the containers with weight aboove the given weight
@@ -422,8 +440,23 @@ def findCont():
 
 
 def findTimePassed():
-    # take delivery id as input and find the time passed from the bg_time.
-    pass
+    try:
+        container_id = int(input("Container ID: "))
+
+        query = "SELECT * from DELIVERY_STATUS where container_id=%d"%container_id
+        cur.execute(query)
+        result = cur.fetchall()
+        if(len(result)==0):
+            raise("No such delivery")
+        current_time = datetime.datetime.now()
+        bg_time = str(result[0]['bg_time'])
+        print("Beginning time is: ",bg_time)
+        bg_t = datetime.datetime.strptime(bg_time,'%Y-%m-%d %H:%M:%S')
+        timedelta =str(current_time - bg_t)
+        print("Time passed is: ",timedelta, " hours")
+        
+    except Exception as e:
+        print(">>>>>>>>>>>>>>",e)
 
 
 def searchUserWithFirstName():
@@ -479,7 +512,12 @@ def dispatch(ch):
         showDeliveryStatus()
     elif(ch == 17):
         deleteUserWithID()
-    
+    elif(ch == 18):
+        findBees()
+    elif(ch==19):
+        findHiveCapacity()
+    elif(ch==20):
+        findTimePassed()
 
     else:
         print("Error: Invalid Option")
@@ -531,6 +569,9 @@ while(1):
                 print("15. undock The Container With ID ")
                 print("16. Show delivery status ")
                 print("17. Delete User ")
+                print("18. Find bees in the location ")
+                print("19. Find hive capacity")
+                print("20. Find time passed for the delivery")
                 # print("9. show all Deliveries")
                 ch = int(input("Enter choice> "))
                 tmp = sp.call('clear', shell=True)
