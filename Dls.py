@@ -93,18 +93,20 @@ def addBee():
     #     print("Failed to insert BEE Details in Database")
     #     print(">>>>>>>>>>>>>",e)
     
+# def addBee():
+#     pass
 
 
-def addBeehive():
-    pass
+# def addBeehive():
+#     pass
 
 
-def addBeehiveHole():
-    pass
+# def addBeehiveHole():
+#     pass
 
 
-def addContainer():
-    pass
+# def addContainer():
+#     pass
 
 
 def showAllUsers():
@@ -292,46 +294,6 @@ def searchDeliveriesUserIsSending():
 
 def searchAllDeliveriesUserIsReceiving():
     pass
-# def hireAnEmployee():
-#     """
-#     This is a sample function implemented for the refrence.
-#     This example is related to the Employee Database.
-#     In addition to taking input, you are required to handle domain errors as well
-#     For example: the SSN should be only 9 characters long
-#     Sex should be only M or F
-#     If you choose to take Super_SSN, you need to make sure the foreign key constraint is satisfied
-#     HINT: Instead of handling all these errors yourself, you can make use of except clause to print the error returned to you by MySQL
-#     """
-#     try:
-#         # Takes emplyee details as input
-#         row = {}
-#         print("Enter new employee's details: ")
-#         name = (input("Name (Fname Minit Lname): ")).split(' ')
-#         row["Fname"] = name[0]
-#         row["Minit"] = name[1]
-#         row["Lname"] = name[2]
-#         row["Ssn"] = input("SSN: ")
-#         row["Bdate"] = input("Birth Date (YYYY-MM-DD): ")
-#         row["Address"] = input("Address: ")
-#         row["Sex"] = input("Sex: ")
-#         row["Salary"] = float(input("Salary: "))
-#         row["Dno"] = int(input("Dno: "))
-
-#         query = "INSERT INTO EMPLOYEE(Fname, Minit, Lname, Ssn, Bdate, Address, Sex, Salary, Dno) VALUES('%s', '%c', '%s', '%s', '%s', '%s', '%c', %f, %d)" % (
-#             row["Fname"], row["Minit"], row["Lname"], row["Ssn"], row["Bdate"], row["Address"], row["Sex"], row["Salary"], row["Dno"])
-
-#         print(query)
-#         cur.execute(query)
-#         con.commit()
-
-#         print("Inserted Into Database")
-
-#     except Exception as e:
-#         con.rollback()
-#         print("Failed to insert into database")
-#         print(">>>>>>>>>>>>>", e)
-
-#     return
 
 
 def dispatch(ch):
@@ -347,11 +309,33 @@ def dispatch(ch):
         showAllUsers()
     elif(ch == 4):
         showAllBees()
-
-        # started by me
+    elif(ch == 5):
+        addStation()
     elif(ch == 6):
-        addUserSubscription()
+        showAllUsers()
     elif(ch == 7):
+        showAllBees()
+    elif(ch == 8):
+        addStation()
+    elif(ch == 9):
+        showAllUsers()
+    elif(ch == 10):
+        showAllBees()
+    elif(ch == 11):
+        addStation()
+    elif(ch == 12):
+        showAllUsers()
+    elif(ch == 13):
+        showAllBees()
+    elif(ch == 14):
+        addStation()
+    elif(ch == 15):
+        showAllUsers()
+    elif(ch == 16):
+        showAllBees()
+    elif(ch == 17):
+        addUserSubscription()
+    elif(ch == 18):
         showUserSubscriptions()
     else:
         print("Error: Invalid Option")
@@ -392,8 +376,8 @@ while(1):
                 print("4. Show All Bees")  # Employee Statistics
                 
                 # started byy me
-                print("6. Take Subscription") # Apply for subscription
-                print("7. Show USERS Subscriptions ") # Show all users with subscription
+                print("17. Take Subscription") # Apply for subscription
+                print("18. Show USERS Subscriptions ") # Show all users with subscription
                 #######
                 print("5. Logout")
                 ch = int(input("Enter choice> "))
