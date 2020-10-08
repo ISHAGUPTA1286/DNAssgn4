@@ -77,41 +77,6 @@ def addStation():
         print(">>>>>>>>>>>>>", e)
 
 
-def addBee():
-    pass
-    # try:
-    #     row = {}
-    #     print("Enter BEE Details")
-    #     row['bee_id'] = int(input("BEE ID: "))
-    #     row['latitude'] = float(input("Location Latitude: "))
-    #     row['longitude'] = float(input("Location Longitude: "))
-    #     row['bee_class'] = input("BEE CLASS- QUEEN or WORKER: ")
-    #     query = "INSERT INTO BEE(bee_id,latitude,longitude,bee_class) VALUES('%d', '%f','%f',,'%s')" %(
-    #         row["bee_id"],row["latitude"],row["longitude"],row["bee_class"])
-        
-    #     cur.execute(query)
-    #     con.commit()
-    #     print("Successfully added BEE Details")
-    # except Exception as e:
-    #     con.rollback()
-    #     print("Failed to insert BEE Details in Database")
-    #     print(">>>>>>>>>>>>>",e)
-    
-# def addBee():
-#     pass
-
-
-# def addBeehive():
-#     pass
-
-
-# def addBeehiveHole():
-#     pass
-
-
-# def addContainer():
-#     pass
-
 
 def showAllUsers():
     try:
