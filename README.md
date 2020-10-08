@@ -13,7 +13,7 @@ DLS is a futuristic transportation system for the consumer-end goods via drones,
 
 ## Installation and Running Instructions
 
-1. load and populate the dataset use the following commands repectively within your mysql environment 
+1. Load and populate the dataset useing following commands repectively within your mysql environment 
 ```SQL
 SOURCE Dls.sql;
 SOURCE populate.sql;
