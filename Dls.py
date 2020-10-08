@@ -3,6 +3,7 @@ import pymysql
 import pymysql.cursors
 from prettytable import PrettyTable
 import datetime
+import pyfiglet 
 
 
 def Exists(model_name, field_name, field_value):
@@ -720,7 +721,12 @@ while(1):
         tmp = sp.call('clear', shell=True)
 
         if(con.open):
-            print("Connected")
+            f = pyfiglet.figlet_format("Drone Logistic System",font='slant')
+            print('\033[34m' + f + '\033[0m')
+            print("\033[92mHello "+username+"!!"+"\033[0m")
+            print("\033[92mWelcome to the DLS command line interface!\033[0m")
+
+            print("You have successfully logged in:)")
         else:
             print("Failed to connect")
 

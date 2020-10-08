@@ -1,6 +1,7 @@
 import subprocess as sp
 import pymysql
 import pymysql.cursors
+import pyfiglet 
 
 
 def option2():
@@ -102,6 +103,10 @@ while(1):
         tmp = sp.call('clear', shell=True)
 
         if(con.open):
+            f = pyfiglet.figlet_format("COMPANY",font='slant')
+            print('\033[32m' + f + '\033[0m')
+            # log("Email CLI", color="blue", figlet=True)
+            print("\033[92mHello "+username+'\033[0m')
             print("Connected")
         else:
             print("Failed to connect")
