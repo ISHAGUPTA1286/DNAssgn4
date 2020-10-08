@@ -47,12 +47,6 @@ DLS is a futuristic transportation system for the consumer-end goods via drones,
 The bees are docked at HIVE, and the Hive provides charging, maintenance, and loading-unloading services to bees. The packet
 to be transported needs to be placed in a user container, which is then picked up by the worker bee and transported to the nearest Hive. The user containers are then sorted (according to drop location) and are itself filled inside a bigger container which is carried by the queen.
 
-## PROJECT BY
-
-
-YouKnowWho- Anvay Karmore(2019101107), Isha Gupta(2019101111), Kushagra Garg(2019113020).
-
-
 ## Command Tree
 - Users(u)
     - All users(u)
@@ -125,3 +119,7 @@ YouKnowWho- Anvay Karmore(2019101107), Isha Gupta(2019101111), Kushagra Garg(201
     - (28) Search Deliveries USer is Receiving
     - (q) back
 - Back(q)
+
+## PROJECT BY
+
+YouKnowWho- Anvay Karmore(2019101107), Isha Gupta(2019101111), Kushagra Garg(2019113020).
