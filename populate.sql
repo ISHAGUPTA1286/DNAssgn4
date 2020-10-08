@@ -414,7 +414,6 @@ INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7086,
 INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7222, '74.347', '-46.7647', ' w');
 INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7253, '-24.4953', '-59.2998', ' w');
 INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7345, '51.7853', '-117.326',  'q');
-INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7351, '25.5829', '-35.248',  'q');
 INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7584, '19.4637', '136.364', ' w');
 INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7699, '24.1334', '-97.8491', ' w');
 INSERT INTO `BEE` (`bee_id`, `latitude`, `longitude`, `bee_class`) VALUES (7745, '30.4967', '-165.764', ' w');
@@ -468,10 +467,8 @@ INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1123, 1303);
 INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1146, 1482);
 INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1172, 1768);
 INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1228, 1874);
-INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1279, 2122);
 INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1420, 2268);
 INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1429, 2296);
-INSERT INTO `DOCKED_BEE` (`bee_id`, `hivehole_id`) VALUES (1446, 2350);
 
 
 INSERT INTO `CONTAINER` (`container_id`, `weight`) VALUES (11375, '57');
