@@ -731,45 +731,209 @@ while(1):
             print("Failed to connect")
 
         tmp = input("Enter any key to CONTINUE>")
+        tmp = sp.call('clear', shell=True)
 
         with con.cursor() as cur:
             while(1):
-                tmp = sp.call('clear', shell=True)
-                print("1. Add User")  
-                print("2. Add Station")  
-                print("3. Show All Users")  
-                print("4. Show All Bees")  
-                print("5. show available containers")
-                print("6. show all containers")
-                print("7. show available bees")
-                print("8. show all beehives")
-                print("9. show all Deliveries")
-                print("10. Send courier")
-                print("11. update user location")
-                print("12. update station location")
-                print("13. complete delivery")
-                print("14. dock The Container With ID To Bee Hive With Id")
-                print("15. undock The Container With ID ")
-                print("16. Show delivery status ")
-                print("17. Delete User ")
-                print("18. Find bees in the location ")
-                print("19. Find hive capacity")
-                print("20. Find time passed for the delivery")
-                print("21. Take Subscription") # Apply for subscription
-                print("22. Update Subscription") # Updating subscription details
-                print("23. Show USERS Subscriptions ") # Show all users with subscription
-                print("24. Update BEE Location") # updates bee location
-                print("25. Filter containers greater than given weight") #filter containers greater than given weight
-                print("26. Search the USER") # Search the user with first name
-                print("27. Search Deliveries User is Sending") #SEarch deliveries which user is sending
-                print("28. Search Deliveries USer is Receiving") #SEarch deliveries which user is recieving
-                ch = int(input("Enter choice> "))
-                tmp = sp.call('clear', shell=True)
-                if ch == -1:
+                # tmp = sp.call('clear', shell=True)
+                print("Users(u)", end="\t")
+                print("Containers(c)", end="\t")
+                print("Deliveries(d)", end="\t")
+                print("Bees(b)", end="\t")
+                print("Beehives(h)", end="\t")
+                print("Quit(q)")
+                # print("1. Add User")  
+                # print("2. Add Station")  
+                # print("3. Show All Users")  
+                # print("4. Show All Bees")  
+                # print("5. show available containers")
+                # print("6. show all containers")
+                # print("7. show available bees")
+                # print("8. show all beehives")
+                # print("9. show all Deliveries")
+                # print("10. Send courier")
+                # print("11. update user location")
+                # print("12. update station location")
+                # print("13. complete delivery")
+                # print("14. dock The Container With ID To Bee Hive With Id")
+                # print("15. undock The Container With ID ")
+                # print("16. Show delivery status ")
+                # print("17. Delete User ")
+                # print("18. Find bees in the location ")
+                # print("19. Find hive capacity")
+                # print("20. Find time passed for the delivery")
+                # print("21. Take Subscription") # Apply for subscription
+                # print("22. Update Subscription") # Updating subscription details
+                # print("23. Show USERS Subscriptions ") # Show all users with subscription
+                # print("24. Update BEE Location") # updates bee location
+                # print("25. Filter containers greater than given weight") #filter containers greater than given weight
+                # print("26. Search the USER") # Search the user with first name
+                # print("27. Search Deliveries User is Sending") #SEarch deliveries which user is sending
+                # print("28. Search Deliveries USer is Receiving") #SEarch deliveries which user is recieving
+                ch = input("Enter choice> ")
+                # tmp = sp.call('clear', shell=True)
+                if ch == "q":
                     break
+                elif ch=="u":
+                    print("All users(u)",end="\t")
+                    print("Add User(a)",end="\t")
+                    print("Delete User(d)",end="\t")
+                    print("Subscriptions(s)",end="\t")
+                    print("InDeliveries(i)",end="\t")
+                    print("OutDeliveries(o)",end="\t")
+                    print("UpdateLocation(l)",end="\t")
+                    print("Station(t)",end="\t")
+                    print("Search for a user(S)",end="\t")
+                    print("Quit(q)")
+
+                    c = input("Enter choice> ")
+                    # tmp = sp.call('clear', shell=True)
+                    if c=="u":
+                        showAllUsers()
+                    elif c=="q":
+                        continue
+                    elif c=="a":
+                        addUser()
+                    elif c=="d":
+                        deleteUserWithID()
+                    elif c=="s":
+                        print("Add subscription(a)",end="\t")
+                        print("Show subscription for the user(s)",end="\t")
+                        print("Update Subscription(u)",end="\t")
+                        print("Quit(q)")
+
+                        chr = input("Enter choice> ")
+                        # tmp = sp.call('clear', shell=True)
+
+                        if(chr=="a"):
+                            addUserSubscription()
+                        elif chr=="q":
+                            continue
+                        elif chr=="s":
+                            showUserSubscriptions()
+                        elif chr=="u":
+                            updateSubscription()
+                        else:
+                            print("Command Not found!!")
+                    elif c=="i":
+                        searchAllDeliveriesUserIsReceiving()
+                    elif c=="o":
+                        searchDeliveriesUserIsSending()
+                    elif c=="l":
+                        updateUserLocation()
+                    elif c=="t":
+                        
+                        print("Add Station(a)",end="\t")
+                        print("Update Station Location(u)",end="\t")
+                        print("Quit(q)")
+
+                        chr = input("Enter choice> ")
+                        # tmp=sp.call('clear',shell=True)
+
+                        if(chr=="a"):
+                            addStation()
+                        elif chr=="q":
+                            continue
+                        elif chr=="u":
+                            updateStationLocation()
+                        else:
+                            print("Command not found!!!")
+                    elif c=="S":
+                        searchUserWithFirstName()
+                    else:
+                        print("Command not found!!")
+
+                elif ch=="c":
+                    print("All Containers(c)",end="\t")
+                    print("Available containers(a)",end="\t")
+                    print("Dock the container in hive(d)",end="\t")
+                    print("UnDock the container (u)",end="\t")
+                    print("Quit(q)")
+
+                    c = input("Enter choice> ")
+                    # tmp = sp.call('clear', shell=True)
+
+                    if c=="c":
+                        showAllContainers()
+                    elif c=="q":
+                        continue
+                    elif c=="a":
+                        showAvailableContaniers()
+                    elif c=="d":
+                        dockTheContainerWithIDToBeeHiveWithId()
+                    elif c=="u":
+                        undockTheContainerWithID()
+                    else:
+                        print("Command not found!!")
+
+                elif ch=="d":
+                    print("All deliveries(d)",end="\t")
+                    print("Add Delivery(a)",end="\t")
+                    print("Remove the Delivery(r)",end="\t")
+                    print("Show time passed for the delivery(t)",end="\t")
+                    print("Quit(q)")
+                    c = input("Enter choice> ")
+                    # tmp = sp.call('clear', shell=True)
+
+                    if c=="d":
+                        showAllDeliveries()
+                    if c=="q":
+                        continue
+                    elif c=="a":
+                        sendCourier()
+                    elif c=="r":
+                        completeDelivery()
+                    elif c=="t":
+                        findTimePassed()
+                    else:
+                        print("Command not found!!")
+
+                elif ch=="b":
+                    print("All Bees(b)",end="\t")
+                    print("Available Bees(a)",end="\t")
+                    print("Find bees in th location(f)",end="\t")
+                    print("Update bee location(l)",end="\t")
+                    print("Quit(q)")
+
+                    c = input("Enter choice> ")
+                    # tmp = sp.call('clear', shell=True)
+
+                    if c=="b":
+                        showAllBees()
+                    elif c=="q":
+                        continue
+                    elif c=="a":
+                        showAvalableBees()
+                    elif c=="f":
+                        findBees()
+                    elif c=="l":
+                        updateBeeLocation()
+                    else:
+                        print("Command not found")
+
+
+                elif ch=="h":
+                    print("All Hives(h)",end="\t")
+                    print("Hive Capacity(c)",end="\t")
+                    print("Quit(q)")
+
+                    c = input("Enter choice> ")
+                    # tmp = sp.call('clear', shell=True)
+
+                    if c=="h":
+                        showAllBeehives()
+                    elif c=="q":
+                        continue
+                    elif c=="c":
+                        findHiveCapacity()
+                    else:
+                        print("Command not found!!!")
+
                 else:
-                    dispatch(ch)
-                    tmp = input("Enter any key to CONTINUE>")
+                    print("Command not recognized!!! Try Again.")
+                    # if(ch=="u")
+                    # dispatch(ch)
+                tmp = input("Enter any key to CONTINUE>")
 
     except:
         tmp = sp.call('clear', shell=True)
