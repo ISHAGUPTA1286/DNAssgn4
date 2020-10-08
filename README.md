@@ -33,8 +33,13 @@ python3 Dls.py
 1. Atleast five queries
  * Show All Users
  * Show All Bees
+ * Show Available Containers
+ * Send Courier
+ * Show delivery status and many more
 2. Atleast three update functions
- * 
+ * Update Subscription
+ * Update User location 
+ * Update station location and many more.
 
 ## Working of the Model
 DLS is a futuristic transportation system for the consumer-end goods via drones, set to replace the current courier delivery services. Planned to be completely manless, customers can opt for providing delivery at their doorstep via drones. The drones are called BEES. Bees are of two types: queen and workers, the queen providing intercity logistic facilities, and workers are small drones that work collaboratively, providing delivery and pickup service to the user.   
