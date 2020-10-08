@@ -4,31 +4,48 @@ It is a user-interactive populated database created on the model of DLS using My
 ## Overview 
 DLS is a futuristic transportation system for the consumer-end goods via drones, set to replace the current courier delivery services. Planned to be completely manless, customers can opt for providing delivery at their doorstep via drones.
 
-## prerequisits
+## Prerequisites
  - mysql-server
  - python3 
- - pretty table 
-  use```$ pip install prettytable```
- - pymysql
+ - Following modules and libraries which can be installed using requirements.txt 
+   * PyMySQL 
+   * Pretty Tables
+   * pyfiglet  
 
 ## Installation and Running Instructions
 
-1. Load and populate the dataset useing following commands repectively within your mysql environment 
-```SQL
-SOURCE Dls.sql;
-SOURCE populate.sql;
+1. Load and populate the dataset using following commands repectively within your mysql environment:
 ```
-2. To start cli run 
-```python
+source Dls.sql;
+source populate.sql;
+```
+2. To install required modules and libraries:
+```
+pip3 install -r requirements.txt
+```
+3. To start CLI run: 
+```
 python3 Dls.py
 ```
-3. Enter the username and password and you are ready to go.
+4. Enter the username and password and you are ready to go.
 
-## PROJECT BY: 
+## Specifications
+1. Atleast five queries
+ * Show All Users
+ * Show All Bees
+ * Show Available Containers
+ * Send Courier
+ * Show delivery status and many more
+2. Atleast three update functions
+ * Update Subscription
+ * Update User location 
+ * Update station location and many more.
 
+## Working of the Model
+DLS is a futuristic transportation system for the consumer-end goods via drones, set to replace the current courier delivery services. Planned to be completely manless, customers can opt for providing delivery at their doorstep via drones. The drones are called BEES. Bees are of two types: queen and workers, the queen providing intercity logistic facilities, and workers are small drones that work collaboratively, providing delivery and pickup service to the user.   
 
-YouKnowWho- Anvay Karmore(2019101107), Isha Gupta(2019101111), Kushagra Garg(2019113020).
-
+The bees are docked at HIVE, and the Hive provides charging, maintenance, and loading-unloading services to bees. The packet
+to be transported needs to be placed in a user container, which is then picked up by the worker bee and transported to the nearest Hive. The user containers are then sorted (according to drop location) and are itself filled inside a bigger container which is carried by the queen.
 
 ## Command Tree
 - Users(u)
@@ -102,3 +119,7 @@ YouKnowWho- Anvay Karmore(2019101107), Isha Gupta(2019101111), Kushagra Garg(201
     - (28) Search Deliveries USer is Receiving
     - (q) back
 - Back(q)
+
+## PROJECT BY
+
+YouKnowWho- Anvay Karmore(2019101107), Isha Gupta(2019101111), Kushagra Garg(2019113020).
