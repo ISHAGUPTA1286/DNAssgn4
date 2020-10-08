@@ -51,6 +51,7 @@ To install PyMySQL and prettyTables, ignore if already installed
 ```
 pip3 install PyMySQL
 pip3 install PTable
+pip3 install pyfiglet
 ```
 
 To run the code 
