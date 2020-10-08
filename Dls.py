@@ -719,6 +719,7 @@ while(1):
                               db='DLS',
                               cursorclass=pymysql.cursors.DictCursor)
         tmp = sp.call('clear', shell=True)
+        tmp = sp.call('clear', shell=True)
 
         if(con.open):
             f = pyfiglet.figlet_format("Drone Logistic System",font='slant')
@@ -731,7 +732,6 @@ while(1):
             print("\033[36mFailed to connect\033[0m")
 
         tmp = input("\nEnter any key to CONTINUE>")
-        tmp = sp.call('clear', shell=True)
 
         with con.cursor() as cur:
             while(1):
@@ -743,7 +743,7 @@ while(1):
                 print("Deliveries(d)", end="\n")
                 print("Bees(b)", end="\n")
                 print("Beehives(h)", end="\n")
-                print("Quit(q)\n")
+                print("Back(q)\n")
                 print("\033[0m")
                 ch = input("\033[36mEnter choice>\033[0m")
                 print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
@@ -752,187 +752,194 @@ while(1):
                 if ch == "q":
                     break
                 elif ch=="u":
-                    print("\n\033[34mSelect choices for which you want to query:\033[0m")
-                    print("\033[32m")
-                    print("All users(u)",end="\n")
-                    print("Add User(a)",end="\n")
-                    print("Delete User(d)",end="\n")
-                    print("Subscriptions(s)",end="\n")
-                    print("InDeliveries(i)",end="\n")
-                    print("OutDeliveries(o)",end="\n")
-                    print("UpdateLocation(l)",end="\n")
-                    print("Station(t)",end="\n")
-                    print("Search for a user(S)",end="\n")
-                    print("Quit(q)\n")
-                    print("\033[0m")
-                    c = input("\033[36mEnter choice/Users>\033[0m")
-                    print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
-                    # tmp = sp.call('clear', shell=True)
-                    if c=="u":
-                        showAllUsers()
-                    elif c=="q":
-                        continue
-                    elif c=="a":
-                        addUser()
-                    elif c=="d":
-                        deleteUserWithID()
-                    elif c=="s":
+                    while 1:
                         print("\n\033[34mSelect choices for which you want to query:\033[0m")
                         print("\033[32m")
-                        print("Add subscription(a)",end="\n")
-                        print("Show subscription for the user(s)",end="\n")
-                        print("Update Subscription(u)",end="\n")
-                        print("Quit(q)\n")
+                        print("All users(u)",end="\n")
+                        print("Add User(a)",end="\n")
+                        print("Delete User(d)",end="\n")
+                        print("Subscriptions(s)",end="\n")
+                        print("InDeliveries(i)",end="\n")
+                        print("OutDeliveries(o)",end="\n")
+                        print("UpdateLocation(l)",end="\n")
+                        print("Station(t)",end="\n")
+                        print("Search for a user(S)",end="\n")
+                        print("Back(q)\n")
                         print("\033[0m")
-                        chr = input("\033[36mEnter choice/Users/Subscriptions>\033[0m ")
+                        c = input("\033[36mEnter choice/Users>\033[0m")
+                        print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
+                        # tmp = sp.call('clear', shell=True)
+                        if c=="u":
+                            showAllUsers()
+                        elif c=="q":
+                            break
+                        elif c=="a":
+                            addUser()
+                        elif c=="d":
+                            deleteUserWithID()
+                        elif c=="s":
+                            while 1:
+                                print("\n\033[34mSelect choices for which you want to query:\033[0m")
+                                print("\033[32m")
+                                print("Add subscription(a)",end="\n")
+                                print("Show subscription for the user(s)",end="\n")
+                                print("Update Subscription(u)",end="\n")
+                                print("Back(q)\n")
+                                print("\033[0m")
+                                chr = input("\033[36mEnter choice/Users/Subscriptions>\033[0m ")
+                                print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
+                                # tmp = sp.call('clear', shell=True)
+
+                                if(chr=="a"):
+                                    addUserSubscription()
+                                elif chr=="q":
+                                    break
+                                elif chr=="s":
+                                    showUserSubscriptions()
+                                elif chr=="u":
+                                    updateSubscription()
+                                else:
+                                    print("Command Not found!!")
+                        elif c=="i":
+                            searchAllDeliveriesUserIsReceiving()
+                        elif c=="o":
+                            searchDeliveriesUserIsSending()
+                        elif c=="l":
+                            updateUserLocation()
+                        elif c=="t":
+                            while 1:
+                                print("\n\033[34mSelect choices for which you want to query:\033[0m")
+                                print("\033[32m")
+                                print("Add Station(a)",end="\n")
+                                print("Update Station Location(u)",end="\n")
+                                print("Back(q)\n")
+                                print("\033[0m")
+                                chr = input("\033[36mEnter choice/Users/Station>\033[0m")
+                                print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
+                                # tmp=sp.call('clear',shell=True)
+
+                                if(chr=="a"):
+                                    addStation()
+                                elif chr=="q":
+                                    break
+                                elif chr=="u":
+                                    updateStationLocation()
+                                else:
+                                    print("Command not found!!!")
+                        elif c=="S":
+                            searchUserWithFirstName()
+                        else:
+                            print("Command not found!!")
+
+                elif ch=="c":
+                    while 1:
+                        print("\n\033[34mSelect choices for which you want to query:\033[0m")
+                        print("\033[32m")
+                        print("All Containers(c)",end="\n")
+                        print("Available containers(a)",end="\n")
+                        print("Dock the container in hive(d)",end="\n")
+                        print("UnDock the container (u)",end="\n")
+                        print("Back(q)\n")
+                        print("\033[0m")
+                        c = input("\033[36mEnter choice/Containers>\033[0m ")
                         print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
                         # tmp = sp.call('clear', shell=True)
 
-                        if(chr=="a"):
-                            addUserSubscription()
-                        elif chr=="q":
-                            continue
-                        elif chr=="s":
-                            showUserSubscriptions()
-                        elif chr=="u":
-                            updateSubscription()
+                        if c=="c":
+                            showAllContainers()
+                        elif c=="q":
+                            break
+                        elif c=="a":
+                            showAvailableContaniers()
+                        elif c=="d":
+                            dockTheContainerWithIDToBeeHiveWithId()
+                        elif c=="u":
+                            undockTheContainerWithID()
                         else:
-                            print("Command Not found!!")
-                    elif c=="i":
-                        searchAllDeliveriesUserIsReceiving()
-                    elif c=="o":
-                        searchDeliveriesUserIsSending()
-                    elif c=="l":
-                        updateUserLocation()
-                    elif c=="t":
-                        print("\n\033[34mSelect choices for which you want to query:\033[0m")
-                        print("\033[32m")
-                        print("Add Station(a)",end="\n")
-                        print("Update Station Location(u)",end="\n")
-                        print("Quit(q)\n")
-                        print("\033[0m")
-                        chr = input("\033[36mEnter choice/Users/Station>\033[0m")
-                        print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
-                        # tmp=sp.call('clear',shell=True)
-
-                        if(chr=="a"):
-                            addStation()
-                        elif chr=="q":
-                            continue
-                        elif chr=="u":
-                            updateStationLocation()
-                        else:
-                            print("Command not found!!!")
-                    elif c=="S":
-                        searchUserWithFirstName()
-                    else:
-                        print("Command not found!!")
-
-                elif ch=="c":
-                    print("\n\033[34mSelect choices for which you want to query:\033[0m")
-                    print("\033[32m")
-                    print("All Containers(c)",end="\n")
-                    print("Available containers(a)",end="\n")
-                    print("Dock the container in hive(d)",end="\n")
-                    print("UnDock the container (u)",end="\n")
-                    print("Quit(q)\n")
-                    print("\033[0m")
-                    c = input("\033[36mEnter choice/Containers>\033[0m ")
-                    print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
-                    # tmp = sp.call('clear', shell=True)
-
-                    if c=="c":
-                        showAllContainers()
-                    elif c=="q":
-                        continue
-                    elif c=="a":
-                        showAvailableContaniers()
-                    elif c=="d":
-                        dockTheContainerWithIDToBeeHiveWithId()
-                    elif c=="u":
-                        undockTheContainerWithID()
-                    else:
-                        print("Command not found!!")
+                            print("Command not found!!")
 
                 elif ch=="d":
-                    print("\n\033[34mSelect choices for which you want to query:\033[0m")
-                    print("\033[32m")
-                    print("All deliveries(d)",end="\n")
-                    print("Add Delivery(a)",end="\n")
-                    print("Remove the Delivery(r)",end="\n")
-                    print("Show time passed for the delivery(t)",end="\n")
-                    print("Quit(q)\n")
-                    print("\033[0m")
-                    c = input("\033[36mEnter choice/Deliveries>\033[0m ")
-                    print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
-                    # tmp = sp.call('clear', shell=True)
+                    while 1:
+                        print("\n\033[34mSelect choices for which you want to query:\033[0m")
+                        print("\033[32m")
+                        print("All deliveries(d)",end="\n")
+                        print("Add Delivery(a)",end="\n")
+                        print("Remove the Delivery(r)",end="\n")
+                        print("Show time passed for the delivery(t)",end="\n")
+                        print("Back(q)\n")
+                        print("\033[0m")
+                        c = input("\033[36mEnter choice/Deliveries>\033[0m ")
+                        print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
+                        # tmp = sp.call('clear', shell=True)
 
-                    if c=="d":
-                        showAllDeliveries()
-                    if c=="q":
-                        continue
-                    elif c=="a":
-                        sendCourier()
-                    elif c=="r":
-                        completeDelivery()
-                    elif c=="t":
-                        findTimePassed()
-                    else:
-                        print("Command not found!!")
+                        if c=="d":
+                            showAllDeliveries()
+                        if c=="q":
+                            break
+                        elif c=="a":
+                            sendCourier()
+                        elif c=="r":
+                            completeDelivery()
+                        elif c=="t":
+                            findTimePassed()
+                        else:
+                            print("Command not found!!")
 
                 elif ch=="b":
-                    print("\n\033[34mSelect choices for which you want to query:\033[0m")
-                    print("\033[32m")
-                    print("All Bees(b)",end="\n")
-                    print("Available Bees(a)",end="\n")
-                    print("Find bees in th location(f)",end="\n")
-                    print("Update bee location(l)",end="\n")
-                    print("Quit(q)\n")
-                    print("\033[0m")
-                    c = input("\033[36mEnter choice/Bees>\033[0m ")
-                    print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
-                    # tmp = sp.call('clear', shell=True)
+                    while 1:
+                        print("\n\033[34mSelect choices for which you want to query:\033[0m")
+                        print("\033[32m")
+                        print("All Bees(b)",end="\n")
+                        print("Available Bees(a)",end="\n")
+                        print("Find bees in th location(f)",end="\n")
+                        print("Update bee location(l)",end="\n")
+                        print("Back(q)\n")
+                        print("\033[0m")
+                        c = input("\033[36mEnter choice/Bees>\033[0m ")
+                        print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
+                        # tmp = sp.call('clear', shell=True)
 
-                    if c=="b":
-                        showAllBees()
-                    elif c=="q":
-                        continue
-                    elif c=="a":
-                        showAvalableBees()
-                    elif c=="f":
-                        findBees()
-                    elif c=="l":
-                        updateBeeLocation()
-                    else:
-                        print("Command not found")
+                        if c=="b":
+                            showAllBees()
+                        elif c=="q":
+                            continue
+                        elif c=="a":
+                            showAvalableBees()
+                        elif c=="f":
+                            findBees()
+                        elif c=="l":
+                            updateBeeLocation()
+                        else:
+                            print("Command not found")
 
 
                 elif ch=="h":
-                    print("\n\033[34mSelect choices for which you want to query:\033[0m")
-                    print("\033[32m")
-                    print("All Hives(h)",end="\n")
-                    print("Hive Capacity(c)",end="\n")
-                    print("Quit(q)\n")
-                    print("\033[0m")
+                    while 1:
+                        print("\n\033[34mSelect choices for which you want to query:\033[0m")
+                        print("\033[32m")
+                        print("All Hives(h)",end="\n")
+                        print("Hive Capacity(c)",end="\n")
+                        print("Back(q)\n")
+                        print("\033[0m")
 
-                    c = input("\033[36mEnter choice/Beehives>\033[0m ")
-                    print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
-                    # tmp = sp.call('clear', shell=True)
+                        c = input("\033[36mEnter choice/Beehives>\033[0m ")
+                        print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
+                        # tmp = sp.call('clear', shell=True)
 
-                    if c=="h":
-                        showAllBeehives()
-                    elif c=="q":
-                        continue
-                    elif c=="c":
-                        findHiveCapacity()
-                    else:
-                        print("Command not found!!!")
+                        if c=="h":
+                            showAllBeehives()
+                        elif c=="q":
+                            continue
+                        elif c=="c":
+                            findHiveCapacity()
+                        else:
+                            print("Command not found!!!")
 
                 else:
                     print("Command not recognized!!! Try Again.")
                     # if(ch=="u")
                     # dispatch(ch)
-                tmp = input("Enter any key to CONTINUE>")
+                # tmp = input("Enter any key to CONTINUE>")
 
     except:
         tmp = sp.call('clear', shell=True)
