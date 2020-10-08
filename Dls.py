@@ -743,6 +743,7 @@ while(1):
                 print("Deliveries(d)", end="\n")
                 print("Bees(b)", end="\n")
                 print("Beehives(h)", end="\n")
+                print("All Commands(a)")
                 print("Back(q)\n")
                 print("\033[0m")
                 ch = input("\033[36mEnter choice>\033[0m")
@@ -902,7 +903,7 @@ while(1):
                         if c=="b":
                             showAllBees()
                         elif c=="q":
-                            continue
+                            break
                         elif c=="a":
                             showAvalableBees()
                         elif c=="f":
@@ -929,11 +930,55 @@ while(1):
                         if c=="h":
                             showAllBeehives()
                         elif c=="q":
-                            continue
+                            break
                         elif c=="c":
                             findHiveCapacity()
                         else:
                             print("Command not found!!!")
+                elif ch=="a":
+                    while 1:
+                        print("\n\033[34mSelect choices for which you want to query:\033[0m")
+
+                        print("\033[32m")
+
+                        print("1. Add User")  
+                        print("2. Add Station")  
+                        print("3. Show All Users")  
+                        print("4. Show All Bees")  
+                        print("5. show available containers")
+                        print("6. show all containers")
+                        print("7. show available bees")
+                        print("8. show all beehives")
+                        print("9. show all Deliveries")
+                        print("10. Send courier")
+                        print("11. update user location")
+                        print("12. update station location")
+                        print("13. complete delivery")
+                        print("14. dock The Container With ID To Bee Hive With Id")
+                        print("15. undock The Container With ID ")
+                        print("16. Show delivery status ")
+                        print("17. Delete User ")
+                        print("18. Find bees in the location ")
+                        print("19. Find hive capacity")
+                        print("20. Find time passed for the delivery")
+                        print("21. Take Subscription") # Apply for subscription
+                        print("22. Update Subscription") # Updating subscription details
+                        print("23. Show USERS Subscriptions ") # Show all users with subscription
+                        print("24. Update BEE Location") # updates bee location
+                        print("25. Filter containers greater than given weight") #filter containers greater than given weight
+                        print("26. Search the USER") # Search the user with first name
+                        print("27. Search Deliveries User is Sending") #SEarch deliveries which user is sending
+                        print("28. Search Deliveries USer is Receiving") #SEarch deliveries which user is recieving
+                        print("q: back")
+                        print("\033[0m")
+                        c = input("\033[36mEnter choice/AllCommands>\033[0m ")
+                        print("\n\033[1;30m////////////////////////////////////////////////////////////////////////////////////////\033[0m\n\n")
+
+                        # tmp = sp.call('clear', shell=True)
+                        if c == "q":
+                            break
+                        else:
+                            dispatch(int(c))
 
                 else:
                     print("Command not recognized!!! Try Again.")
